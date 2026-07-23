@@ -5,15 +5,11 @@ services:
       POSTGRES_DB: urundb
       POSTGRES_USER: urunuser
       POSTGRES_PASSWORD: guclu-bir-sifre
-    ports:
-      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
   backend:
     build: ./website
-    ports:
-      - "8080:8080"
     depends_on:
       - postgres
     environment:
@@ -23,9 +19,17 @@ services:
 
   frontend:
     build: ./urun-frontend
-    ports:
-      - "3000:80"
     depends_on:
+      - backend
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
       - backend
 
 volumes:
