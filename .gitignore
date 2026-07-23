@@ -1,0 +1,15 @@
+# Backend
+website/target/
+website/.mvn/
+
+# Frontend
+urun-frontend/node_modules/
+urun-frontend/dist/
+
+# Genel
+.DS_Store
+*.log
+
+# SSH key'leri ASLA yükleme!
+*.key
+*.pub
