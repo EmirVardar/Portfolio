@@ -16,8 +16,8 @@ public class CorsConfig {
                     .allowedOrigins(
                         "http://localhost:5173",
                         "http://localhost",
-                        "https://emirvardar.site",
-                        "https://www.emirvardar.site"
+                        "https://emirvardar.com",
+                        "https://www.emirvardar.com"
                     )
                     .allowedMethods("GET", "POST", "PUT", "DELETE");
             }
