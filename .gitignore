@@ -9,6 +9,7 @@ urun-frontend/dist/
 # Genel
 .DS_Store
 *.log
+.env
 
 # SSH key'leri ASLA yükleme!
 *.key

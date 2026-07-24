@@ -12,10 +12,15 @@ services:
     build: ./website
     depends_on:
       - postgres
+    env_file:
+      - .env
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/urundb
       SPRING_DATASOURCE_USERNAME: urunuser
       SPRING_DATASOURCE_PASSWORD: guclu-bir-sifre
+      APP_UPLOAD_DIR: /app/uploads
+    volumes:
+      - uploads:/app/uploads
 
   frontend:
     build: ./urun-frontend
@@ -34,3 +39,4 @@ services:
 
 volumes:
   pgdata:
+  uploads:
