@@ -1,26 +1,6 @@
 services:
-  postgres:
-    image: postgres:16
-    environment:
-      POSTGRES_DB: urundb
-      POSTGRES_USER: urunuser
-      POSTGRES_PASSWORD: guclu-bir-sifre
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
   backend:
     build: ./website
-    depends_on:
-      - postgres
-    env_file:
-      - .env
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/urundb
-      SPRING_DATASOURCE_USERNAME: urunuser
-      SPRING_DATASOURCE_PASSWORD: guclu-bir-sifre
-      APP_UPLOAD_DIR: /app/uploads
-    volumes:
-      - uploads:/app/uploads
 
   frontend:
     build: ./urun-frontend
@@ -36,7 +16,3 @@ services:
     depends_on:
       - frontend
       - backend
-
-volumes:
-  pgdata:
-  uploads:

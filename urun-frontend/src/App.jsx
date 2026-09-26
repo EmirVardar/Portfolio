@@ -1,29 +1,33 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import Layout from './components/Layout';
-import HomePage from './pages/HomePage';
-import BlogListPage from './pages/BlogListPage';
-import PostDetailPage from './pages/PostDetailPage';
-import NewPostPage from './pages/NewPostPage';
-import AdminLoginPage from './pages/AdminLoginPage';
-import CvPage from './pages/CvPage';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import ScrollManager from './components/ScrollManager';
+import Home from './pages/Home';
+import ServiceDetail from './pages/ServiceDetail';
+import Works from './pages/Works';
+import WhyPage from './pages/WhyPage';
+import Blog from './pages/Blog';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Layout>
+    <BrowserRouter>
+      <ScrollManager />
+      <div className="min-h-screen bg-white">
+        <Header />
+        <main>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/cv" element={<CvPage />} />
-            <Route path="/blog" element={<BlogListPage />} />
-            <Route path="/blog/new" element={<NewPostPage />} />
-            <Route path="/blog/:id" element={<PostDetailPage />} />
-            <Route path="/admin/login" element={<AdminLoginPage />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/hizmetler/:slug" element={<ServiceDetail />} />
+            <Route path="/calismalar" element={<Works />} />
+            <Route path="/neden-emir" element={<WhyPage />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
-        </Layout>
-      </BrowserRouter>
-    </AuthProvider>
+        </main>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
