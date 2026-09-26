@@ -1,91 +1,67 @@
-import CountUp from './CountUp';
-import useReveal from '../hooks/useReveal';
+import { MessagesSquare, MonitorSmartphone, PencilRuler, Rocket } from 'lucide-react';
+import Reveal from './Reveal';
+import SectionHeading from './SectionHeading';
+import IconBadge from './IconBadge';
 
 const steps = [
   {
-    n: '01',
-    title: 'Demo siteniz kısa sürede hazır',
-    desc: 'İşletmenizi tanıyıp, logo ve birkaç fotoğrafla size özel bir demo hazırlıyorum.',
+    icon: MessagesSquare,
+    title: 'Tanışma',
+    desc: 'İşletmenize gelir ya da telefonda konuşuruz. Ne sattığınızı, müşterinizi ve ihtiyacınızı dinlerim.',
   },
   {
-    n: '02',
-    title: "Google'da görünür olun",
-    desc: 'İşletme profilinizi kurup optimize ediyorum; haritalarda ve aramalarda öne çıkın.',
+    icon: MonitorSmartphone,
+    title: 'Ücretsiz demo',
+    desc: '24–48 saat içinde size özel bir demo hazırlarım. Ödeme yapmadan önce görürsünüz.',
   },
   {
-    n: '03',
-    title: 'QR menü ve online sipariş',
-    desc: 'Panelden yönetilen dijital menü; masadan QR ile anında erişim, fiyat değişimi anında.',
+    icon: PencilRuler,
+    title: 'Revize ve onay',
+    desc: 'Beğenmediğiniz yeri birlikte düzeltiriz. Fiyat baştan bellidir, sonradan sürpriz çıkmaz.',
   },
   {
-    n: '04',
-    title: 'Sosyal medyada aktif kalın',
-    desc: 'Düzenli içerik ve hedefli reklamlarla markanız gündemde kalır, doğru müşteriye ulaşır.',
+    icon: Rocket,
+    title: 'Yayın ve destek',
+    desc: 'Onayınızla yayına alırım. Sonrasında da bir telefon uzağınızdayım.',
   },
 ];
 
-function StepCard({ step, index }) {
-  const [ref, visible] = useReveal();
-  return (
-    <div
-      ref={ref}
-      style={{ transitionDelay: visible ? `${index * 90}ms` : '0ms' }}
-      className={`transition-all duration-700 ease-out ${
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-      }`}
-    >
-      <p className="font-serif italic text-3xl text-teal-700/40">{step.n}</p>
-      <h3 className="mt-3 font-semibold text-ink text-lg">{step.title}</h3>
-      <p className="mt-2 text-sm text-neutral-500 leading-relaxed">{step.desc}</p>
-    </div>
-  );
-}
-
 export default function Process() {
-  const [headRef, headVisible] = useReveal();
-
   return (
     <section className="bg-white">
-      <div className="max-w-6xl mx-auto px-6 py-24">
-        <div
-          ref={headRef}
-          className={`transition-all duration-700 ease-out ${
-            headVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-          }`}
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <span className="w-6 h-px bg-teal-700" />
-            <p className="text-sm font-semibold tracking-wide text-teal-700">NASIL ÇALIŞIYORUM</p>
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-ink max-w-xl">
-            Gerçek demolar, <span className="font-serif italic font-medium text-teal-700">gerçek sonuçlar</span>
-          </h2>
-        </div>
+      <div className="max-w-6xl mx-auto px-6 py-24 md:py-28">
+        <SectionHeading
+          kicker="NASIL ÇALIŞIYORUM"
+          title={
+            <>
+              Dört adımda <span className="font-serif italic font-medium text-teal-700">yayındasınız</span>
+            </>
+          }
+          desc="Önce görüyorsunuz, sonra karar veriyorsunuz. Beğenmezseniz hiçbir yükümlülüğünüz yok."
+        />
 
-        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          {steps.map((step, index) => (
-            <StepCard key={step.n} step={step} index={index} />
-          ))}
-        </div>
+        <div className="relative mt-16">
+          {/* Adımları birleştiren çizgi */}
+          <div
+            aria-hidden
+            className="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-teal-700/0 via-teal-700/30 to-teal-700/0"
+          />
 
-        <div className="mt-20 grid grid-cols-3 divide-x divide-neutral-200 border-t border-b border-neutral-200 py-10">
-          <div className="text-center px-4">
-            <p className="text-4xl md:text-5xl font-extrabold text-ink">
-              <CountUp target={24} suffix="" />
-            </p>
-            <p className="mt-2 text-xs md:text-sm text-neutral-500 tracking-wide">SAATTE DEMO</p>
-          </div>
-          <div className="text-center px-4">
-            <p className="text-4xl md:text-5xl font-extrabold text-ink">
-              <CountUp target={9} suffix="" />
-            </p>
-            <p className="mt-2 text-xs md:text-sm text-neutral-500 tracking-wide">FARKLI HİZMET</p>
-          </div>
-          <div className="text-center px-4">
-            <p className="text-4xl md:text-5xl font-extrabold text-ink">
-              <CountUp target={100} suffix="%" />
-            </p>
-            <p className="mt-2 text-xs md:text-sm text-neutral-500 tracking-wide">ŞEFFAF FİYAT</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+            {steps.map((step, index) => {
+              return (
+                <Reveal key={step.title} delay={index * 120} className="group text-center">
+                  <div className="relative w-16 mx-auto">
+                    <IconBadge icon={step.icon} index={index} size="lg" />
+                    <span className="absolute -top-2 -right-2.5 w-6 h-6 rounded-full bg-ink text-white text-[11px] font-semibold flex items-center justify-center ring-4 ring-white">
+                      {index + 1}
+                    </span>
+                  </div>
+                  <h3 className="mt-6 font-semibold text-ink text-lg">{step.title}</h3>
+                  <p className="mt-2 text-sm text-neutral-500 leading-relaxed max-w-[240px] mx-auto">{step.desc}</p>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { services } from '../data/services';
+import { contact } from '../data/contact';
+import InstagramIcon from './InstagramIcon';
 
 export default function Footer() {
   return (
@@ -16,7 +18,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="text-xs font-semibold tracking-wide text-neutral-500 mb-4">HİZMETLER</p>
+          <p className="text-xs font-semibold tracking-wide text-neutral-400 mb-4">HİZMETLER</p>
           <ul className="space-y-2 text-sm">
             {services.map((service) => (
               <li key={service.slug}>
@@ -29,7 +31,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="text-xs font-semibold tracking-wide text-neutral-500 mb-4">KURUMSAL</p>
+          <p className="text-xs font-semibold tracking-wide text-neutral-400 mb-4">KURUMSAL</p>
           <ul className="space-y-2 text-sm">
             <li>
               <Link to="/neden-emir" className="hover:text-teal-400 transition-colors">
@@ -42,11 +44,6 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/blog" className="hover:text-teal-400 transition-colors">
-                Blog
-              </Link>
-            </li>
-            <li>
               <Link to="/#iletisim" className="hover:text-teal-400 transition-colors">
                 İletişim
               </Link>
@@ -55,23 +52,44 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="text-xs font-semibold tracking-wide text-neutral-500 mb-4">İLETİŞİM</p>
+          <p className="text-xs font-semibold tracking-wide text-neutral-400 mb-4">İLETİŞİM</p>
           <ul className="space-y-2 text-sm">
             <li>
-              <a href="https://wa.me/905318858981" target="_blank" rel="noreferrer" className="hover:text-teal-400 transition-colors">
+              <a href={contact.whatsapp} target="_blank" rel="noreferrer" className="hover:text-teal-400 transition-colors">
                 WhatsApp
               </a>
             </li>
-            <li>0531 885 89 81</li>
-            <li>Akhisar / Manisa</li>
+            <li>
+              <a href={`tel:+90${contact.phone.replace(/\D/g, '').slice(1)}`} className="hover:text-teal-400 transition-colors">
+                {contact.phone}
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${contact.email}`} className="hover:text-teal-400 transition-colors break-all">
+                {contact.email}
+              </a>
+            </li>
+            <li>{contact.location}</li>
           </ul>
+          <a
+            href={contact.instagramUrl}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram"
+            className="mt-5 inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-white/15 text-sm hover:border-teal-400 hover:text-teal-400 transition-colors"
+          >
+            <InstagramIcon size={16} />@{contact.instagram}
+          </a>
         </div>
       </div>
 
       <div className="border-t border-white/10">
-        <p className="max-w-6xl mx-auto px-6 py-6 text-xs text-neutral-500">
-          © {new Date().getFullYear()} Emir Vardar · Tüm hakları saklıdır
-        </p>
+        <div className="max-w-6xl mx-auto px-6 pt-6 pb-24 md:pb-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-neutral-400">
+          <p>© {new Date().getFullYear()} Emir Vardar · Tüm hakları saklıdır</p>
+          <Link to="/kvkk" className="hover:text-teal-400 transition-colors">
+            KVKK Aydınlatma Metni
+          </Link>
+        </div>
       </div>
     </footer>
   );

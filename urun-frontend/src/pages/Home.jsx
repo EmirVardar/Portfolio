@@ -4,8 +4,11 @@ import Process from '../components/Process';
 import Showcase from '../components/Showcase';
 import WhyMe from '../components/WhyMe';
 import Contact from '../components/Contact';
+import usePageMeta from '../hooks/usePageMeta';
 
 export default function Home() {
+  usePageMeta();
+
   return (
     <>
       <Hero />

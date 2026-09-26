@@ -1,6 +1,10 @@
 import { useState } from 'react';
-import { MapPin, Phone } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { MapPin, Phone, Mail } from 'lucide-react';
+import { contact } from '../data/contact';
+import InstagramIcon from './InstagramIcon';
 import useReveal from '../hooks/useReveal';
+import { trackEvent } from '../analytics';
 
 const WHATSAPP_NUMBER = '905318858981';
 
@@ -19,6 +23,7 @@ export default function Contact() {
       form.message && `Mesaj: ${form.message}`,
     ].filter(Boolean);
     const text = encodeURIComponent(lines.join('\n'));
+    trackEvent('iletisim-formu');
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank', 'noreferrer');
   };
 
@@ -53,11 +58,31 @@ export default function Contact() {
               </span>
               0531 885 89 81
             </a>
+            <a
+              href={`mailto:${contact.email}`}
+              className="flex items-center gap-3 text-ink font-semibold hover:text-teal-700 transition-colors"
+            >
+              <span className="w-9 h-9 rounded-full bg-teal-50 flex items-center justify-center text-teal-700">
+                <Mail size={16} strokeWidth={1.75} />
+              </span>
+              {contact.email}
+            </a>
+            <a
+              href={contact.instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-3 text-ink font-semibold hover:text-teal-700 transition-colors"
+            >
+              <span className="w-9 h-9 rounded-full bg-teal-50 flex items-center justify-center text-teal-700">
+                <InstagramIcon size={16} />
+              </span>
+              @{contact.instagram}
+            </a>
             <p className="flex items-center gap-3 text-neutral-500">
               <span className="w-9 h-9 rounded-full bg-teal-50 flex items-center justify-center text-teal-700">
                 <MapPin size={16} strokeWidth={1.75} />
               </span>
-              Akhisar / Manisa
+              {contact.location}
             </p>
           </div>
         </div>
@@ -112,8 +137,12 @@ export default function Contact() {
             >
               WhatsApp'tan Gönder
             </button>
-            <p className="text-xs text-neutral-400 text-center">
-              Form WhatsApp üzerinden iletilir · Genelde kısa sürede dönüş yapılır
+            <p className="text-xs text-neutral-500 text-center leading-relaxed">
+              Form WhatsApp üzerinden iletilir. Gönder'e bastığınızda{' '}
+              <Link to="/kvkk" className="underline underline-offset-2 hover:text-teal-700">
+                KVKK Aydınlatma Metni
+              </Link>
+              'ni okuduğunuzu kabul etmiş olursunuz.
             </p>
           </form>
         </div>

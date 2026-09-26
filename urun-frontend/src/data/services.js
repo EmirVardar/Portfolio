@@ -329,3 +329,24 @@ export const services = [
 export function getServiceBySlug(slug) {
   return services.find((s) => s.slug === slug);
 }
+
+export const serviceGroups = [
+  {
+    n: '01',
+    title: 'Web & Yazılım',
+    desc: 'İnternetteki vitrininiz: hızlı, mobil uyumlu ve işinize göre kurulmuş.',
+    slugs: ['web-sitesi-tasarimi', 'e-ticaret-cozumleri', 'qr-menu', 'ozel-yazilim-gelistirme'],
+  },
+  {
+    n: '02',
+    title: 'Görünürlük & Reklam',
+    desc: 'Müşteri sizi Google’da, haritada ve sosyal medyada bulsun.',
+    slugs: ['google-isletme-profili', 'sosyal-medya-yonetimi', 'dijital-reklam'],
+  },
+  {
+    n: '03',
+    title: 'Marka & Strateji',
+    desc: 'Tutarlı bir kimlik ve nereye gittiğini bilen bir dijital plan.',
+    slugs: ['kurumsal-kimlik-ve-marka-tasarimi', 'dijital-strateji-ve-danismanlik'],
+  },
+].map((group) => ({ ...group, items: group.slugs.map(getServiceBySlug) }));
